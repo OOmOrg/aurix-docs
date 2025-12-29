@@ -4,10 +4,12 @@ on:
     branches:
       - master
       - main
+
 permissions:
   contents: read
   pages: write
   id-token: write
+
 jobs:
   deploy:
     environment:
@@ -22,6 +24,10 @@ jobs:
           python-version: 3.x
       - run: pip install zensical
       - run: zensical build --clean
+
+      - name: Add CNAME for custom domain
+        run: echo "docs.aurix.com.sg" > site/CNAME
+
       - uses: actions/upload-pages-artifact@v4
         with:
           path: site
