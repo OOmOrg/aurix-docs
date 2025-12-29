@@ -25,6 +25,10 @@ jobs:
       - run: pip install zensical
       - run: zensical build --clean
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
       - name: Protect site with password
         run: npx staticrypt site -r -p "${{ secrets.DOCS_PASSWORD }}"
 
