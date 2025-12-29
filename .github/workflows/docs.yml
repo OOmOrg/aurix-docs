@@ -25,6 +25,9 @@ jobs:
       - run: pip install zensical
       - run: zensical build --clean
 
+      - name: Protect site with password
+        run: npx staticrypt site -r -p "${{ secrets.DOCS_PASSWORD }}"
+
       - name: Add CNAME for custom domain
         run: echo "docs.aurix.com.sg" > site/CNAME
 
