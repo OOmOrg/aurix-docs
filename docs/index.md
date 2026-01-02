@@ -1,166 +1,58 @@
 ---
 icon: lucide/rocket
+title: Introduction
 ---
 
-# Get started
+# Introduction
 
-For full documentation visit [zensical.org](https://zensical.org/docs/).
+Welcome to the **Aurix Integration Hub**. This guide helps partners and developers connect with the Aurix platform.
 
-## Commands
+## Collaboration
 
-* [`zensical new`][new] - Create a new project
-* [`zensical serve`][serve] - Start local web server
-* [`zensical build`][build] - Build your site
+This documentation is built for our partners. We know every system is different, and we are ready to adapt.
 
-  [new]: https://zensical.org/docs/usage/new/
-  [serve]: https://zensical.org/docs/usage/preview/
-  [build]: https://zensical.org/docs/usage/build/
+> **Our Commitment**: If specific endpoints, data structures, or webhooks are identified that would streamline the integration, please contact our development team. We are eager to collaborate and implement solutions that ensure the integration goes smoothly.
 
-## Examples
 
-### Admonitions
+## About Aurix
 
-> Go to [documentation](https://zensical.org/docs/authoring/admonitions/)
+Aurix enables businesses to link their social media accounts to intelligent AI tools. Once connected, our API and webhooks allow external systems to use our specialized agents to automate tasks:
 
-!!! note
+*   **Lead Gen Agent**: Automatically collects and qualifies user details via chat. It sends structured lead data to your system based on your settings.
+*   **FAQ Agent**: Instantly answers customer questions using a verified knowledge base.
 
-    This is a **note** admonition. Use it to provide helpful information.
+## WhatsApp Widget
 
-!!! warning
+The **WhatsApp Widget** embeds a chat interface on websites. It links web traffic data (like UTM parameters) to WhatsApp conversations to track attribution from ad clicks to messages.
 
-    This is a **warning** admonition. Be careful!
+**How it Works:**
 
-### Details
+1.  **Captures Traffic Data**: A lightweight script on the website captures URL parameters (UTM, GCLID), source URLs, and device identifiers.
+2.  **Generates Correlation**: When a user clicks to chat, the system generates a unique **Correlation ID** (e.g., `O-xY123z`).
+3.  **Links Conversation**: This ID is embedded in the pre-filled WhatsApp message. When the user sends it, the web session data is permanently linked to the new lead.
 
-> Go to [documentation](https://zensical.org/docs/authoring/admonitions/#collapsible-blocks)
-
-??? info "Click to expand for more info"
+!!! warning "Development Status"
+    The WhatsApp widget is currently in **active development**.
     
-    This content is hidden until you click to expand it.
-    Great for FAQs or long explanations.
+    *   **Now**: Supports URL parsing, click tracking, and basic correlation.
+    *   **Coming Soon**: Advanced device tracking, session linking, and cross-platform identity matching.
 
-## Code Blocks
+## Data & Attribution Roadmap
 
-> Go to [documentation](https://zensical.org/docs/authoring/code-blocks/)
+We are upgrading our tracking to provide precise attribution data. While we currently provide raw request data, we are adding deeper intelligence to our data feeds.
 
-``` python hl_lines="2" title="Code blocks"
-def greet(name):
-    print(f"Hello, {name}!") # (1)!
+Here is what is coming:
 
-greet("Python")
-```
+1.  **Network & Location**
+    *   **Now**: Raw IP address.
+    *   **Future**: Detailed location (City, Lat/Long), Carrier (e.g., Singtel), and connection type. This improves tracking accuracy.
 
-1.  > Go to [documentation](https://zensical.org/docs/authoring/code-blocks/#code-annotations)
+2.  **Device & Browser Details**
+    *   **Now**: Raw User-Agent string.
+    *   **Future**: Specific details on Operating System (e.g., Android 10) and Browser (e.g., Chrome 143). This helps match browser clicks to server conversions.
 
-    Code annotations allow to attach notes to lines of code.
-
-Code can also be highlighted inline: `#!python print("Hello, Python!")`.
-
-## Content tabs
-
-> Go to [documentation](https://zensical.org/docs/authoring/content-tabs/)
-
-=== "Python"
-
-    ``` python
-    print("Hello from Python!")
-    ```
-
-=== "Rust"
-
-    ``` rs
-    println!("Hello from Rust!");
-    ```
-
-## Diagrams
-
-> Go to [documentation](https://zensical.org/docs/authoring/diagrams/)
-
-``` mermaid
-graph LR
-  A[Start] --> B{Error?};
-  B -->|Yes| C[Hmm...];
-  C --> D[Debug];
-  D --> B;
-  B ---->|No| E[Yay!];
-```
-
-## Footnotes
-
-> Go to [documentation](https://zensical.org/docs/authoring/footnotes/)
-
-Here's a sentence with a footnote.[^1]
-
-Hover it, to see a tooltip.
-
-[^1]: This is the footnote.
+3.  **Page Context**
+    *   **Now**: Landing Page URL.
+    *   **Future**: Full page titles and referrer data (e.g., "YouTube" vs "Google").
 
 
-## Formatting
-
-> Go to [documentation](https://zensical.org/docs/authoring/formatting/)
-
-- ==This was marked (highlight)==
-- ^^This was inserted (underline)^^
-- ~~This was deleted (strikethrough)~~
-- H~2~O
-- A^T^A
-- ++ctrl+alt+del++
-
-## Icons, Emojis
-
-> Go to [documentation](https://zensical.org/docs/authoring/icons-emojis/)
-
-* :sparkles: `:sparkles:`
-* :rocket: `:rocket:`
-* :tada: `:tada:`
-* :memo: `:memo:`
-* :eyes: `:eyes:`
-
-## Maths
-
-> Go to [documentation](https://zensical.org/docs/authoring/math/)
-
-$$
-\cos x=\sum_{k=0}^{\infty}\frac{(-1)^k}{(2k)!}x^{2k}
-$$
-
-!!! warning "Needs configuration"
-    Note that MathJax is included via a `script` tag on this page and is not
-    configured in the generated default configuration to avoid including it
-    in a pages that do not need it. See the documentation for details on how
-    to configure it on all your pages if they are more Maths-heavy than these
-    simple starter pages.
-
-<script id="MathJax-script" async src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
-<script>
-  window.MathJax = {
-    tex: {
-      inlineMath: [["\\(", "\\)"]],
-      displayMath: [["\\[", "\\]"]],
-      processEscapes: true,
-      processEnvironments: true
-    },
-    options: {
-      ignoreHtmlClass: ".*|",
-      processHtmlClass: "arithmatex"
-    }
-  };
-</script>
-
-## Task Lists
-
-> Go to [documentation](https://zensical.org/docs/authoring/lists/#using-task-lists)
-
-* [x] Install Zensical
-* [x] Configure `zensical.toml`
-* [x] Write amazing documentation
-* [ ] Deploy anywhere
-
-## Tooltips
-
-> Go to [documentation](https://zensical.org/docs/authoring/tooltips/)
-
-[Hover me][example]
-
-  [example]: https://example.com "I'm a tooltip!"
