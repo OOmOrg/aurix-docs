@@ -169,7 +169,7 @@ Once registered, Aurix will immediately begin sending events to your URL.
 
 ### Example: Widget Click Event
 
-When a user clicks the WhatsApp widget, your listener will receive:
+When an anonymous user clicks the WhatsApp widget, your listener will receive:
 
 ```json
 {
@@ -190,7 +190,7 @@ When a user clicks the WhatsApp widget, your listener will receive:
 
 ### Example: Lead Correlated Event
 
-When that user sends a message and is identified:
+When the user sends their first message and is identified:
 
 ```json
 {
@@ -203,6 +203,30 @@ When that user sends a message and is identified:
     "phone_number": "+15551234567",
     "lead_status": "correlated",
     "channel_id": "..."
+  }
+}
+```
+
+### Example: Lead Complete Event
+
+When the AI collects all required information from the lead:
+
+```json
+{
+  "event_type": "lead.complete",
+  "event_id": "evt_1704201000",
+  "timestamp": "2024-01-02T12:10:00Z",
+  "data": {
+    "correlation_id": "wa_123456",
+    "conversation_id": 987,
+    "lead_status": "complete",
+    "lead_data": {
+      "name": "Mock User",
+      "email": "mock@example.com",
+      "phone": "+15550009999",
+      "company": "Mock Inc",
+      "intent": "Testing Webhooks"
+    }
   }
 }
 ```

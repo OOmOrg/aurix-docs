@@ -80,6 +80,24 @@ curl -X GET \
 
 Aurix sends JSON payloads for the following events.
 
+#### Event Flow Summary
+1.  **`widget.click`** (User Action)
+    *   **Trigger**: An **Anonymous User** clicks the WhatsApp widget.
+    *   **Purpose**: Initiates tracking and captures attribution data (UTM params, IP) for the session.
+    *   **State**: User is **Anonymous**.
+
+2.  **`lead.correlated`** (Identity Resolution)
+    *   **Trigger**: The user sends their first message, allowing the system to resolve their identity (Phone Number).
+    *   **Purpose**: Links the anonymous session (`correlation_id`) to a **Known Profile**.
+    *   **State**: User is **Identified** but profile data is incomplete.
+
+3.  **`lead.complete`** (Profile Enrichment)
+    *   **Trigger**: The AI successfully collects all required data points (Name, Email, Intent).
+    *   **Purpose**: Finalizes the profile enrichment process.
+    *   **State**: User is a **Qualified Lead** ready for activation/export.
+
+---
+
 #### `widget.click`
 Triggers when a visitor clicks the WhatsApp widget. Contains "First Touch" attribution.
 
@@ -115,6 +133,29 @@ Triggers when an anonymous visitor sends their first message. Links the `correla
     "phone_number": "6512345678",
     "lead_status": "correlated",
     "channel_id": "791163770738681"
+  }
+}
+```
+
+#### `lead.complete`
+Triggers when the AI has collected all required information from the user (e.g., name, email, intent). This event signifies a qualified lead.
+
+```json
+{
+  "event_type": "lead.complete",
+  "event_id": "evt_1704201000",
+  "timestamp": "2024-01-02T12:10:00Z",
+  "data": {
+    "correlation_id": "O-vpbWx3M",
+    "conversation_id": 3293,
+    "lead_status": "complete",
+    "lead_data": {
+      "name": "Mock User",
+      "email": "mock@example.com",
+      "phone": "+15550009999",
+      "company": "Mock Inc",
+      "intent": "Testing Webhooks"
+    }
   }
 }
 ```
