@@ -101,6 +101,8 @@ Aurix sends JSON payloads for the following events.
 #### `widget.click`
 Triggers when a visitor clicks the WhatsApp widget. Contains "First Touch" attribution.
 
+For a detailed breakdown of what data fields are parsed and stored (e.g. UTM parameters, device info), please refer to the [Tracking Capabilities](index.md#current-vs-planned-tracking-capabilities) section.
+
 ```json
 {
   "event_type": "widget.click",
