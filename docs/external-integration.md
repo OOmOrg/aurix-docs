@@ -2,39 +2,49 @@
 title: External Integration
 description: Guide for integrating with external application via Webhooks and REST API.
 icon: lucide/bow-arrow
-
 ---
 
 # External Integration
+Aurix can send event notifications to your specified endpoint using webhooks. This 
+integration allows you to receive real-time updates for supported events directly to your 
+backend system. This document serves as the technical reference for integrating with the Aurix platform. It covers authentication, webhook configuration, event schemas, and the Leads API.
 
-Aurix can send event notifications to your specified endpoint using webhooks. This integration allows you to receive real-time updates for supported events directly to your backend system. Additionally, the Leads API allows integration partners to fetch batched lead data and attribution logs programmatically.
+For a step-by-step implementation guide, please refer to the [Integration Tutorial](tutorial-webhook-integration).
+
+## API Overview
+
+**Base URL**: `https://chatbot-api.oomdigital.com`
+
+All API requests must be made over **HTTPS**.
+
+### Authentication
+
+Access to the Integration API is protected by a **Bearer Token**. You must include your `INTEGRATION_API_KEY` in the `Authorization` header of every request. You can request for this key from the Aurix team.
+
+```text
+Authorization: Bearer <YOUR_INTEGRATION_API_KEY>
+```
+
+---
 
 ## Webhooks
 
-Aurix sends webhook notifications as `POST` requests to your specified endpoint. Each request contains a JSON payload with information about the event that occurred.
+Webhooks allow your system to receive real-time notifications about lead activities and widget interactions.
 
-### Supported Events
+### 1. Configuration
 
-The webhooks support the following events:
-
-*   **`widget.click`**: Triggers immediately when a visitor clicks the WhatsApp widget. Captures the "First Touch" attribution data.
-*   **`lead.correlated`**: Triggers when an anonymous visitor sends their first message. This event links the `correlation_id` (from the click) to a specific phone number.
-*   **`lead.complete`**: Triggers when a lead is marked as complete. This event sends the full lead details including name, email, and phone number collected by the AI agent.
-
-### Configuration
-
-To start receiving events, you must register your webhook URL via the API. This configuration endpoint is protected and requires your **Integration API Key**.
+To start receiving events, you must register your webhook listener URL.
 
 #### Register or Update URL
 
-Registers or updates the webhook URL where you will receive events. Returns a `secret` used for signature verification.
+**Endpoint**: `PUT /integrations/topkee/webhook-config`
 
-**Endpoint:** `PUT /api/integrations/topkee/webhook-config`
+ Registers or updates the URL where Aurix will send `POST` requests.
 
 ```bash title="Request"
 curl -X PUT \
-  "https://chatbot.oomdigital.com/api/integrations/topkee/webhook-config" \
-  -H "Authorization: Bearer <TOPKEE_INTEGRATION_API_KEY>" \
+  "https://chatbot-api.oomdigital.com/integrations/topkee/webhook-config" \
+  -H "Authorization: Bearer <YOUR_INTEGRATION_API_KEY>" \
   -H "Content-Type: application/json" \
   -d '{
     "url": "https://your-backend.com/webhooks/aurix"
@@ -43,210 +53,154 @@ curl -X PUT \
 
 ```json title="Response"
 {
-  "id": "123e4567-e89b-12d3-a456-426614174000",
+  "id": "dc2321f2-6a75-4d50-8861-3ea24ca29a84",
   "service_name": "topkee",
   "target_url": "https://your-backend.com/webhooks/aurix",
-  "secret": "aurix_8f7d6e5c4b3a2...",
+  "secret": "aurix_pzgwhW5X...",
   "is_active": true
 }
 ```
 
 !!! warning "Important"
-    Store the `secret` securely. You will need it to verify the `x-hub-signature` header of incoming webhook requests.
+    Save the `secret` from the response. You will need it to verify the `x-hub-signature` header on incoming events.
 
-#### Get Current Configuration
+#### Get Configuration
 
-Retrieves the current webhook configuration.
+**Endpoint**: `GET /integrations/topkee/webhook-config`
 
-**Endpoint:** `GET /api/integrations/topkee/webhook-config`
+Retrieves your current webhook settings.
 
 ```bash title="Request"
 curl -X GET \
-  "https://chatbot.oomdigital.com/api/integrations/topkee/webhook-config" \
-  -H "Authorization: Bearer <TOPKEE_INTEGRATION_API_KEY>"
+  "https://chatbot-api.oomdigital.com/integrations/topkee/webhook-config" \
+  -H "Authorization: Bearer <YOUR_KEY>"
 ```
 
-### Webhook Authentication
+### 2. Event Payloads
 
-Webhook authentication ensures that incoming webhook requests are securely verified before processing. This allows consumers to trust that webhook events originate from a secure and verified source.
+Aurix sends JSON payloads for the following events.
 
-#### Verifying the Signature
-
-Each webhook request sent from the server includes an `x-hub-signature` header containing a SHA-256 HMAC signature of the request payload.
-
-1.  **Receive the Webhook**: Extract the payload and the `x-hub-signature` header.
-2.  **Verify the Signature**:
-    *   Compute the HMAC SHA-256 signature using the raw request body and the shared secret key.
-    *   Compare the computed signature to the header value.
-    *   If they match, the request is verified as authentic.
-
-```python title="verification.py"
-import hmac
-import hashlib
-
-def verify_signature(payload_body: str, signature_header: str, secret: str) -> bool:
-    expected = hmac.new(
-        secret.encode('utf-8'), 
-        payload_body.encode('utf-8'), 
-        hashlib.sha256
-    ).hexdigest()
-    
-    return hmac.compare_digest(expected, signature_header)
-```
-
-### Event Reference & Payloads
-
-Understanding the lead journey helps interpret the events:
-
-1.  **Widget Interaction**: User clicks widget (`widget.click`).
-2.  **Correlation**: User sends a message (`lead.correlated`). The lead is "incomplete" as the AI is still collecting info.
-3.  **Completion**: AI collects required fields (`lead.complete`).
-
-#### Common Schema
-
-All events share the following top-level structure:
-
-| Field | Type | Description |
-| :--- | :--- | :--- |
-| `event_type` | String | Name of the event type (e.g., `widget.click`). |
-| `event_id` | String | Unique identifier for this specific event instance. |
-| `timestamp` | String | ISO 8601 timestamp of when the event occurred. |
-| `data` | Object | Event-specific payload containing attribution or lead details. |
-
-#### widget.click
+#### `widget.click`
+Triggers when a visitor clicks the WhatsApp widget. Contains "First Touch" attribution.
 
 ```json
 {
   "event_type": "widget.click",
-  "timestamp": "2024-01-23T10:30:00.123Z",
+  "event_id": "evt_1704200000",
+  "timestamp": "2024-01-02T12:00:00Z",
   "data": {
-    "correlation_id": "O-xY123z",
-    "device_id": "550e8400-e29b-41d4-a716-446655440000",
-    "click_url": "https://example.com/landing?utm_source=google&gclid=AbCd123",
+    "correlation_id": "O-vpbWx3M",
+    "device_id": "9fad5f62-2d08-49d4-852a-b48be43beb68",
+    "click_url": "https://example.com/landing?utm_source=google",
     "parsed_params": {
-      "utm_source": "google",
-      "utm_medium": "cpc",
-      "gclid": "AbCd123"
+      "utm_source": "google"
     },
-    "user_agent": "Mozilla/5.0...",
-    "ip_address": "192.168.1.1" 
+    "ip_address": "127.0.0.1",
+    "user_agent": "Mozilla/5.0..."
   }
 }
 ```
 
-#### lead.correlated
-
-!!! note
-    A correlated lead may initially have partial information while the AI engages the user.
+#### `lead.correlated`
+Triggers when an anonymous visitor sends their first message. Links the `correlation_id` to a phone number.
 
 ```json
 {
   "event_type": "lead.correlated",
-  "timestamp": "2024-01-23T10:35:00.456Z",
+  "event_id": "evt_1704200500",
+  "timestamp": "2024-01-02T12:05:00Z",
   "data": {
-    "correlation_id": "O-xY123z",
-    "conversation_id": 105,
-    "phone_number": "+1234567890",
+    "correlation_id": "O-vpbWx3M",
+    "conversation_id": 3293,
+    "phone_number": "6512345678",
     "lead_status": "correlated",
     "channel_id": "791163770738681"
   }
 }
 ```
 
-#### lead.complete
+### 3. Security
 
-Fired when the AI has collected all required lead information.
-
-```json
-{
-  "event_type": "lead.complete",
-  "timestamp": "2024-01-23T10:45:00.789Z",
-  "data": {
-    "correlation_id": "O-xY123z",
-    "conversation_id": 105,
-    "lead_status": "complete",
-    "lead_data": {
-        "name": "John Doe",
-        "email": "john.doe@example.com",
-        "phone": "+1234567890",
-        "company": "Acme Corp",
-        "intent": "Interested in pricing"
-    }
-  }
-}
-```
+Every webhook request includes an `x-hub-signature` header. This is an HMAC-SHA256 signature generated using your `secret`. **Always verify this signature** to ensure the request is genuine.
 
 ---
 
-## API Documentation
+## Leads API
 
-The Leads API allows integration partners to fetch batched lead data and attribution logs programmatically.
-
-!!! note "Access Restricted"
-    These endpoints are restricted to integration partners only. You must use the specific integration API key (`TOPKEE_INTEGRATION_API_KEY`) provided during onboarding.
-
-### Authentication
-
-All API requests must include your Integration API Key in the `Authorization` header.
-
-```text
-Authorization: Bearer <TOPKEE_INTEGRATION_API_KEY>
-```
+Fetch lead data and attribution logs programmatically.
 
 ### Get Leads
 
-Returns all records matching the date criteria.
+**Endpoint**: `GET /integrations/topkee/leads`
 
-**Endpoint:** `GET /api/integrations/topkee/leads`
+Returns a list of leads with their status, collected form data, and attribution info.
 
-**Query Parameters:**
-
-*   `limit` (optional): Number of records to return.
-*   `from_date` (optional): ISO 8601 String. Return records created after this date.
-*   `to_date` (optional): ISO 8601 String. Return records created before this date.
+**Query Parameters**:
+*   `limit`: (int) Max records to return (default 50).
+*   `offset`: (int) Pagination offset.
+*   `from_date`: (ISO 8601) Filter start date.
+*   `to_date`: (ISO 8601) Filter end date.
 
 ```bash title="Request"
 curl -X GET \
-  "https://chatbot.oomdigital.com/api/integrations/topkee/leads?limit=10" \
-  -H "Authorization: Bearer <TOPKEE_INTEGRATION_API_KEY>"
+  "https://chatbot-api.oomdigital.com/integrations/topkee/leads?limit=5" \
+  -H "Authorization: Bearer <YOUR_INTEGRATION_API_KEY>"
 ```
 
 ```json title="Response"
 {
+  "status": 200,
+  "message": "ok",
   "data": [
     {
-      "wa_inbound_source_correlation_id": "O-xY123z",
-      "conversation_id": 105,
-      "created_at": "2024-01-23T10:30:00.123Z",
-      "wa_inbound_source_correlated_at": "2024-01-23T10:35:00.456Z",
-      "wa_inbound_source_click_url": "https://example.com/landing?...",
-      "wa_inbound_source_parsed_params": {
-        "utm_source": "google",
-        "gclid": "AbCd123"
-      }
+      "lead_id": 470,
+      "lead_status": "active",
+      "lead_json": {
+        "contact_name": "Jane Doe",
+        "contact_number": "6587487282",
+        "contact_email": "jane@example.com",
+        "preferred_outlet": "Orchard Gateway",
+        "selected_service": "Eyelash Extensions",
+        "preferred_date_time": "1 January 2026"
+      },
+      "created_at": "2025-12-31T12:20:16.583181Z",
+      "updated_at": "2026-01-02T01:38:05.868837Z",
+      "click_url": null,
+      "parsed_params": null,
+      "ip_address": null,
+      "user_agent": null
     }
-  ],
-  "message": "Leads fetched successfully"
+  ]
 }
 ```
 
 ### Get Attribution Logs
 
-Retrieves raw attribution logs (clicks), regardless of whether they converted to a lead. Returns a list of inbound source objects similar to the `widget.click` payload.
+**Endpoint**: `GET /integrations/topkee/attribution`
 
-**Endpoint:** `GET /api/integrations/topkee/attribution`
+Retrieves raw widget click logs, useful for auditing traffic sources.
 
 ```bash title="Request"
 curl -X GET \
-  "https://chatbot.oomdigital.com/api/integrations/topkee/attribution?limit=5" \
-  -H "Authorization: Bearer <TOPKEE_INTEGRATION_API_KEY>"
+  "https://chatbot-api.oomdigital.com/integrations/topkee/attribution?limit=5" \
+  -H "Authorization: Bearer <YOUR_KEY>"
 ```
 
-### Error Codes
-
-| Code | Description |
-| :--- | :--- |
-| **200** | Success |
-| **401** | Unauthorized (Invalid or missing API Key) |
-| **500** | Internal Server Error |
-
+```json title="Response"
+{
+  "status": 200,
+  "message": "ok",
+  "data": [
+    {
+      "wa_inbound_source_correlation_id": "O-vpbWx3M",
+      "wa_inbound_source_device_id": "9fad5f62-2d08-49d4-852a-b48be43beb68",
+      "created_at": "2026-01-02T11:17:02.644566Z",
+      "wa_inbound_source_click_url": "http://example.com/auth/login",
+      "wa_inbound_source_first_raw_url": "http://example.com/auth/login",
+      "wa_inbound_source_parsed_params": {},
+      "wa_inbound_source_ip_address": "127.0.0.1",
+      "wa_inbound_source_user_agent": "Mozilla/5.0..."
+    }
+  ]
+}
+```
