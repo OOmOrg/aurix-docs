@@ -16,7 +16,8 @@ This documentation is built for our partners. We know every system is different,
 
 ## About Aurix
 
-Aurix enables businesses to link their social media accounts to intelligent AI tools. Once connected, our API and webhooks allow external systems to use our specialized agents to automate tasks:
+Aurix enables businesses to connect their social media accounts to intelligent AI tools. Once connected, we can securely push and share collected data, such as qualified leads and widget interaction details,directly with your system in real time. Our API and webhooks enable seamless synchronization, allowing your platform to immediately receive and act on new information gathered by our AI agents.
+
 
 *   **Lead Gen Agent**: Automatically collects and qualifies user details via chat. It sends structured lead data to your system based on your settings.
 *   **FAQ Agent**: Instantly answers customer questions using a verified knowledge base.
@@ -35,24 +36,16 @@ The **WhatsApp Widget** embeds a chat interface on websites. It links web traffi
     The WhatsApp widget is currently in **active development**.
     
     *   **Now**: Supports URL parsing, click tracking, and basic correlation.
-    *   **Coming Soon**: Advanced device tracking, session linking, and cross-platform identity matching.
+    *   **Coming Soon**: Advanced device tracking, network and page context.
 
-## Data & Attribution Roadmap
+## Current vs Planned Tracking Capabilities
 
-We are upgrading our tracking to provide precise attribution data. While we currently provide raw request data, we are adding deeper intelligence to our data feeds.
-
-Here is what is coming:
-
-1.  **Network & Location**
-    *   **Now**: Raw IP address.
-    *   **Future**: Detailed location (City, Lat/Long), Carrier (e.g., Singtel), and connection type. This improves tracking accuracy.
-
-2.  **Device & Browser Details**
-    *   **Now**: Raw User-Agent string.
-    *   **Future**: Specific details on Operating System (e.g., Android 10) and Browser (e.g., Chrome 143). This helps match browser clicks to server conversions.
-
-3.  **Page Context**
-    *   **Now**: Landing Page URL.
-    *   **Future**: Full page titles and referrer data (e.g., "YouTube" vs "Google").
-
-
+| Feature | Status | Details |
+| :--- | :---: | :--- |
+| **Raw IP Address** | :lucide-check: | **Available.** |
+| **Raw User-Agent** | :lucide-check: | **Available.** |
+| **Landing Page URL** | :lucide-check: | **Available.** |
+| **Parsed Ad Params** | :lucide-check: | **Available.** <br>• Full **"Capture Everything"** approach with raw parsing. <br>• **No Truncation:** We do not filter or truncate keys. We store every parameter as presented in the URL.<br>• **Duplicate Handling:** Automatically converts duplicate keys (e.g., multiple `utm_source`) into arrays (`["google", "search"]`). |
+| **Network** | :lucide-x: | **Not available.** (Carrier/ASN/Geo-location). |
+| **Device Fingerprinting** | :lucide-x: | **Not available.**  |
+| **Page Context** | :lucide-x: | **Not available.** (Referrer URLs and Page Titles are not currently captured). |

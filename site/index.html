@@ -341,10 +341,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#data-attribution-roadmap" class="md-nav__link">
+  <a href="#current-vs-planned-tracking-capabilities" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Data &amp; Attribution Roadmap
+        Current vs Planned Tracking Capabilities
       
     </span>
   </a>
@@ -449,10 +449,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#data-attribution-roadmap" class="md-nav__link">
+  <a href="#current-vs-planned-tracking-capabilities" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Data &amp; Attribution Roadmap
+        Current vs Planned Tracking Capabilities
       
     </span>
   </a>
@@ -490,7 +490,7 @@
 <p><strong>Our Commitment</strong>: If specific endpoints, data structures, or webhooks are identified that would streamline the integration, please contact our development team. We are eager to collaborate and implement solutions that ensure the integration goes smoothly.</p>
 </blockquote>
 <h2 id="about-aurix">About Aurix<a class="headerlink" href="#about-aurix" title="Permanent link">&para;</a></h2>
-<p>Aurix enables businesses to link their social media accounts to intelligent AI tools. Once connected, our API and webhooks allow external systems to use our specialized agents to automate tasks:</p>
+<p>Aurix enables businesses to connect their social media accounts to intelligent AI tools. Once connected, we can securely push and share collected data, such as qualified leads and widget interaction details,directly with your system in real time. Our API and webhooks enable seamless synchronization, allowing your platform to immediately receive and act on new information gathered by our AI agents.</p>
 <ul>
 <li><strong>Lead Gen Agent</strong>: Automatically collects and qualifies user details via chat. It sends structured lead data to your system based on your settings.</li>
 <li><strong>FAQ Agent</strong>: Instantly answers customer questions using a verified knowledge base.</li>
@@ -508,35 +508,56 @@
 <p>The WhatsApp widget is currently in <strong>active development</strong>.</p>
 <ul>
 <li><strong>Now</strong>: Supports URL parsing, click tracking, and basic correlation.</li>
-<li><strong>Coming Soon</strong>: Advanced device tracking, session linking, and cross-platform identity matching.</li>
+<li><strong>Coming Soon</strong>: Advanced device tracking, network and page context.</li>
 </ul>
 </div>
-<h2 id="data-attribution-roadmap">Data &amp; Attribution Roadmap<a class="headerlink" href="#data-attribution-roadmap" title="Permanent link">&para;</a></h2>
-<p>We are upgrading our tracking to provide precise attribution data. While we currently provide raw request data, we are adding deeper intelligence to our data feeds.</p>
-<p>Here is what is coming:</p>
-<ol>
-<li>
-<p><strong>Network &amp; Location</strong></p>
-<ul>
-<li><strong>Now</strong>: Raw IP address.</li>
-<li><strong>Future</strong>: Detailed location (City, Lat/Long), Carrier (e.g., Singtel), and connection type. This improves tracking accuracy.</li>
-</ul>
-</li>
-<li>
-<p><strong>Device &amp; Browser Details</strong></p>
-<ul>
-<li><strong>Now</strong>: Raw User-Agent string.</li>
-<li><strong>Future</strong>: Specific details on Operating System (e.g., Android 10) and Browser (e.g., Chrome 143). This helps match browser clicks to server conversions.</li>
-</ul>
-</li>
-<li>
-<p><strong>Page Context</strong></p>
-<ul>
-<li><strong>Now</strong>: Landing Page URL.</li>
-<li><strong>Future</strong>: Full page titles and referrer data (e.g., "YouTube" vs "Google").</li>
-</ul>
-</li>
-</ol>
+<h2 id="current-vs-planned-tracking-capabilities">Current vs Planned Tracking Capabilities<a class="headerlink" href="#current-vs-planned-tracking-capabilities" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Feature</th>
+<th style="text-align: center;">Status</th>
+<th style="text-align: left;">Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Raw IP Address</strong></td>
+<td style="text-align: center;"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span></td>
+<td style="text-align: left;"><strong>Available.</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Raw User-Agent</strong></td>
+<td style="text-align: center;"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span></td>
+<td style="text-align: left;"><strong>Available.</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Landing Page URL</strong></td>
+<td style="text-align: center;"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span></td>
+<td style="text-align: left;"><strong>Available.</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Parsed Ad Params</strong></td>
+<td style="text-align: center;"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span></td>
+<td style="text-align: left;"><strong>Available.</strong> <br>• Full <strong>"Capture Everything"</strong> approach with raw parsing. <br>• <strong>No Truncation:</strong> We do not filter or truncate keys. We store every parameter as presented in the URL.<br>• <strong>Duplicate Handling:</strong> Automatically converts duplicate keys (e.g., multiple <code>utm_source</code>) into arrays (<code>["google", "search"]</code>).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Network</strong></td>
+<td style="text-align: center;"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></span></td>
+<td style="text-align: left;"><strong>Not available.</strong> (Carrier/ASN/Geo-location).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Device Fingerprinting</strong></td>
+<td style="text-align: center;"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></span></td>
+<td style="text-align: left;"><strong>Not available.</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Page Context</strong></td>
+<td style="text-align: center;"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></span></td>
+<td style="text-align: left;"><strong>Not available.</strong> (Referrer URLs and Page Titles are not currently captured).</td>
+</tr>
+</tbody>
+</table>
 
 
 
