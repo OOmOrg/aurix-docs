@@ -19,12 +19,12 @@ This documentation is built for our partners. We know every system is different,
 Aurix enables businesses to connect their social media accounts to intelligent AI tools. Once connected, we can securely push and share collected data, such as qualified leads and widget interaction details,directly with your system in real time. Our API and webhooks enable seamless synchronization, allowing your platform to immediately receive and act on new information gathered by our AI agents.
 
 
-*   **Lead Gen Agent**: Automatically collects and qualifies user details via chat. It sends structured lead data to your system based on your settings.
+*   **Lead Gen Agent**: Automatically collects and qualifies user details via chat.
 *   **FAQ Agent**: Instantly answers customer questions using a verified knowledge base.
 
 ## WhatsApp Widget
 
-The **WhatsApp Widget** embeds a chat interface on websites. It links web traffic data (like UTM parameters) to WhatsApp conversations to track attribution from ad clicks to messages.
+The **WhatsApp Widget** embeds a chat widget on websites. It links web traffic data (like UTM parameters) to WhatsApp conversations to track attribution from ad clicks to messages.
 
 **How it Works:**
 
