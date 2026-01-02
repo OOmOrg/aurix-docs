@@ -92,7 +92,7 @@ Aurix sends JSON payloads for the following events.
     *   **State**: User is **Identified** but profile data is incomplete.
 
 3.  **`lead.complete`** (Profile Enrichment)
-    *   **Trigger**: The AI successfully collects all required data points (Name, Email, Intent).
+    *   **Trigger**: The AI successfully collects all required data points (Name, Email, Phone Number).
     *   **Purpose**: Finalizes the profile enrichment process.
     *   **State**: User is a **Qualified Lead** ready for activation/export.
 
