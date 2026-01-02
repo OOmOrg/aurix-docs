@@ -9,8 +9,8 @@ The site is built using [Zensical](https://zensical.org/docs/get-started/), a mo
 To build or preview the documentation locally, ensure you have [Python](https://www.python.org/) installed and then set up a virtual environment:
 
 ```sh
-python3 -m venv .venv
-source .venv/bin/activate
+python3 -m venv myenv
+source myenv/bin/activate
 pip install zensical
 ```
 
