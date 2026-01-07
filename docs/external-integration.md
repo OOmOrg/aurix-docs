@@ -4,10 +4,9 @@ description: Guide for integrating with external application via Webhooks and RE
 icon: lucide/bow-arrow
 ---
 
-# External Integration
-Aurix can send event notifications to your specified endpoint using webhooks. This 
-integration allows you to receive real-time updates for supported events directly to your 
-backend system. This document serves as the technical reference for integrating with the Aurix platform. It covers authentication, webhook configuration, event schemas, and the Leads API.
+# Aurix External CDP Integration
+
+Aurix can send event notifications to your specified endpoint using webhooks. This integration allows you to receive real-time updates for supported events directly to your backend system. This document serves as the technical reference for integrating with the Aurix platform. It covers authentication, webhook configuration, event schemas, and the Leads API.
 
 For a step-by-step implementation guide, please refer to the [Integration Tutorial](tutorial-webhook-integration).
 
@@ -19,10 +18,10 @@ All API requests must be made over **HTTPS**.
 
 ### Authentication
 
-Access to the Integration API is protected by a **Bearer Token**. You must include your `INTEGRATION_API_KEY` in the `Authorization` header of every request. You can request for this key from the Aurix team.
+Access to the Integration API is protected by a **Bearer Token**. You must include your `AURIX_API_KEY` (formerly `INTEGRATION_API_KEY`) in the `Authorization` header of every request. You can request for this key from the Aurix team.
 
 ```text
-Authorization: Bearer <YOUR_INTEGRATION_API_KEY>
+Authorization: Bearer <YOUR_AURIX_API_KEY>
 ```
 
 ---
@@ -37,14 +36,14 @@ To start receiving events, you must register your webhook listener URL.
 
 #### Register or Update URL
 
-**Endpoint**: `PUT /integrations/topkee/webhook-config`
+**Endpoint**: `PUT /integrations/external/webhook-config`
 
- Registers or updates the URL where Aurix will send `POST` requests.
+Registers or updates the URL where Aurix will send `POST` requests.
 
 ```bash title="Request"
 curl -X PUT \
-  "https://chatbot-api.oomdigital.com/integrations/topkee/webhook-config" \
-  -H "Authorization: Bearer <YOUR_INTEGRATION_API_KEY>" \
+  "https://chatbot-api.oomdigital.com/integrations/external/webhook-config" \
+  -H "Authorization: Bearer <YOUR_AURIX_API_KEY>" \
   -H "Content-Type: application/json" \
   -d '{
     "url": "https://your-backend.com/webhooks/aurix"
@@ -54,7 +53,7 @@ curl -X PUT \
 ```json title="Response"
 {
   "id": "dc2321f2-6a75-4d50-8861-3ea24ca29a84",
-  "service_name": "topkee",
+  "service_name": "external_cdp",
   "target_url": "https://your-backend.com/webhooks/aurix",
   "secret": "aurix_pzgwhW5X...",
   "is_active": true
@@ -66,35 +65,27 @@ curl -X PUT \
 
 #### Get Configuration
 
-**Endpoint**: `GET /integrations/topkee/webhook-config`
+**Endpoint**: `GET /integrations/external/webhook-config`
 
 Retrieves your current webhook settings.
 
 ```bash title="Request"
 curl -X GET \
-  "https://chatbot-api.oomdigital.com/integrations/topkee/webhook-config" \
-  -H "Authorization: Bearer <YOUR_KEY>"
+  "https://chatbot-api.oomdigital.com/integrations/external/webhook-config" \
+  -H "Authorization: Bearer <YOUR_AURIX_API_KEY>"
 ```
 
 ### 2. Event Payloads
 
 Aurix sends JSON payloads for the following events.
 
-#### Event Flow Summary
-1.  **`widget.click`** (User Action)
-    *   **Trigger**: An **Anonymous User** clicks the WhatsApp widget.
-    *   **Purpose**: Initiates tracking and captures attribution data (UTM params, IP) for the session.
-    *   **State**: User is **Anonymous**.
+#### Lead Lifecycle & Events
 
-2.  **`lead.correlated`** (Identity Resolution)
-    *   **Trigger**: The user sends their first message, allowing the system to resolve their identity (Phone Number).
-    *   **Purpose**: Links the anonymous session (`correlation_id`) to a **Known Profile**.
-    *   **State**: User is **Identified** but profile data is incomplete.
-
-3.  **`lead.complete`** (Profile Enrichment)
-    *   **Trigger**: The AI successfully collects all required data points (Name, Email, Phone Number).
-    *   **Purpose**: Finalizes the profile enrichment process.
-    *   **State**: User is a **Qualified Lead** ready for activation/export.
+| Event | Status | Description | Action for CDP |
+| :--- | :--- | :--- | :--- |
+| `widget.click` | **Anonymous** | User clicked WhatsApp but hasn't messaged yet. | Create anonymous session/cookie profile. |
+| `lead.correlated`| **Identified** | User sent a message; phone number is now linked to session. | Merge anonymous session with a User Profile. |
+| `lead.complete` | **Qualified** | AI collected name, email, and intent. | Enrich profile and trigger CRM workflows. |
 
 ---
 
@@ -102,6 +93,9 @@ Aurix sends JSON payloads for the following events.
 Triggers when a visitor clicks the WhatsApp widget. Contains "First Touch" attribution.
 
 For a detailed breakdown of what data fields are parsed and stored (e.g. UTM parameters, device info), please refer to the [Tracking Capabilities](index.md#current-vs-planned-tracking-capabilities) section.
+
+*   `correlation_id`: (String) A unique session identifier used to link future events to this click.
+*   `parsed_params`: (Object) Dictionary of UTM parameters and GCLID extracted from the URL.
 
 ```json
 {
@@ -162,9 +156,13 @@ Triggers when the AI has collected all required information from the user (e.g.,
 }
 ```
 
-### 3. Security
+### 3. Security & Reliability
 
-Every webhook request includes an `x-hub-signature` header. This is an HMAC-SHA256 signature generated using your `secret`. **Always verify this signature** to ensure the request is genuine.
+#### Signature Verification
+Every webhook request includes an `x-hub-signature` header. This is an **HMAC-SHA256** signature generated using your `secret`. **Always verify this signature** to ensure the request is genuine.
+
+#### Retry Policy
+Aurix currently uses a **Fire and Forget** mechanism. If your listener is down or returns a non-200 status code, the event **will not be retried**. Ensure your listener is highly available and responds quickly (within 10 seconds).
 
 ---
 
@@ -174,7 +172,7 @@ Fetch lead data and attribution logs programmatically.
 
 ### Get Leads
 
-**Endpoint**: `GET /integrations/topkee/leads`
+**Endpoint**: `GET /integrations/external/leads`
 
 Returns a list of leads with their status, collected form data, and attribution info.
 
@@ -186,8 +184,8 @@ Returns a list of leads with their status, collected form data, and attribution 
 
 ```bash title="Request"
 curl -X GET \
-  "https://chatbot-api.oomdigital.com/integrations/topkee/leads?limit=5" \
-  -H "Authorization: Bearer <YOUR_INTEGRATION_API_KEY>"
+  "https://chatbot-api.oomdigital.com/integrations/external/leads?limit=5" \
+  -H "Authorization: Bearer <YOUR_AURIX_API_KEY>"
 ```
 
 ```json title="Response"
@@ -219,14 +217,14 @@ curl -X GET \
 
 ### Get Attribution Logs
 
-**Endpoint**: `GET /integrations/topkee/attribution`
+**Endpoint**: `GET /integrations/external/attribution`
 
 Retrieves raw widget click logs, useful for auditing traffic sources.
 
 ```bash title="Request"
 curl -X GET \
-  "https://chatbot-api.oomdigital.com/integrations/topkee/attribution?limit=5" \
-  -H "Authorization: Bearer <YOUR_KEY>"
+  "https://chatbot-api.oomdigital.com/integrations/external/attribution?limit=5" \
+  -H "Authorization: Bearer <YOUR_AURIX_API_KEY>"
 ```
 
 ```json title="Response"

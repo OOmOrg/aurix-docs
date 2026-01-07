@@ -10,7 +10,7 @@ This guide will walk you through the end-to-end process of integrating with Auri
 
 ## Prerequisites
 
-*   **API Key**: You should have received a `Bearer` token (API Key) from the Aurix team.
+*   **API Key**: You should have received a `Bearer` token (`AURIX_API_KEY`) from the Aurix team.
 *   **Python Installed**: This guide uses Python for the example listener, but you can use any language.
 
 ---
@@ -125,16 +125,16 @@ Aurix needs to reach your listener over the public internet. For development, yo
 
 Now you must tell Aurix where to send the events. You will use the **Configuration API** to set your URL.
 
-**Endpoint**: `PUT https://chatbot-api.oomdigital.com/integrations/topkee/webhook-config`
+**Endpoint**: `PUT https://chatbot-api.oomdigital.com/integrations/external/webhook-config`
 
 **Command**:
 
-Replace `<YOUR_API_KEY>` with the key provided to you, and `<YOUR_WEBHOOK_URL>` with your public URL from Step 2.
+Replace `<YOUR_AURIX_API_KEY>` with the key provided to you, and `<YOUR_WEBHOOK_URL>` with your public URL from Step 2.
 
 ```bash
-curl -X PUT "https://chatbot-api.oomdigital.com/integrations/topkee/webhook-config" \
+curl -X PUT "https://chatbot-api.oomdigital.com/integrations/external/webhook-config" \
      -H "Content-Type: application/json" \
-     -H "Authorization: Bearer <YOUR_API_KEY>" \
+     -H "Authorization: Bearer <YOUR_AURIX_API_KEY>" \
      -d '{
            "url": "<YOUR_WEBHOOK_URL>"
          }'
@@ -147,7 +147,7 @@ The API will respond with a JSON object containing a `secret`.
 ```json
 {
   "id": "...",
-  "service_name": "topkee",
+  "service_name": "external_cdp",
   "target_url": "https://a1b2-c3d4.ngrok.io/webhook",
   "secret": "aurix_8f7d9a8b...", 
   "is_active": true
@@ -232,4 +232,3 @@ When the AI collects all required information from the lead:
 ```
 
 You have now successfully integrated with Aurix!
-
