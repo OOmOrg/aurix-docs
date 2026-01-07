@@ -18,7 +18,9 @@ All API requests must be made over **HTTPS**.
 
 ### Authentication
 
-Access to the Integration API is protected by a **Bearer Token**. You must include your `AURIX_API_KEY` (formerly `INTEGRATION_API_KEY`) in the `Authorization` header of every request. You can request for this key from the Aurix team.
+Access to the Integration API is protected by a **Bearer Token**. You must include your `AURIX_API_KEY` in the `Authorization` header of every request. You can request for this key from the Aurix team.
+
+**Important**: Each API key uniquely identifies your partner account. The system automatically resolves your identity from the API key.
 
 ```text
 Authorization: Bearer <YOUR_AURIX_API_KEY>
@@ -38,7 +40,7 @@ To start receiving events, you must register your webhook listener URL.
 
 **Endpoint**: `PUT /integrations/external/webhook-config`
 
-Registers or updates the URL where Aurix will send `POST` requests.
+ Registers or updates the URL where Aurix will send `POST` requests.
 
 ```bash title="Request"
 curl -X PUT \
@@ -53,12 +55,14 @@ curl -X PUT \
 ```json title="Response"
 {
   "id": "dc2321f2-6a75-4d50-8861-3ea24ca29a84",
-  "service_name": "external_cdp",
   "target_url": "https://your-backend.com/webhooks/aurix",
   "secret": "aurix_pzgwhW5X...",
   "is_active": true
 }
 ```
+
+  !!! note 
+      Each API Key uniquely identifies a partner account and allows for **one** registered webhook listener URL. Registering a new URL will overwrite the previous one.
 
 !!! warning "Important"
     Save the `secret` from the response. You will need it to verify the `x-hub-signature` header on incoming events.
@@ -79,13 +83,21 @@ curl -X GET \
 
 Aurix sends JSON payloads for the following events.
 
-#### Lead Lifecycle & Events
+#### Event Flow Summary
+1.  **`widget.click`** (User Action)
+    *   **Trigger**: An **Anonymous User** clicks the WhatsApp widget.
+    *   **Purpose**: Initiates tracking and captures attribution data (UTM params, IP) for the session.
+    *   **State**: User is **Anonymous**.
 
-| Event | Status | Description | Action for CDP |
-| :--- | :--- | :--- | :--- |
-| `widget.click` | **Anonymous** | User clicked WhatsApp but hasn't messaged yet. | Create anonymous session/cookie profile. |
-| `lead.correlated`| **Identified** | User sent a message; phone number is now linked to session. | Merge anonymous session with a User Profile. |
-| `lead.complete` | **Qualified** | AI collected name, email, and intent. | Enrich profile and trigger CRM workflows. |
+2.  **`lead.correlated`** (Identity Resolution)
+    *   **Trigger**: The user sends their first message, allowing the system to resolve their identity (Phone Number).
+    *   **Purpose**: Links the anonymous session (`correlation_id`) to a **Known Profile**.
+    *   **State**: User is **Identified** but profile data is incomplete.
+
+3.  **`lead.complete`** (Profile Enrichment)
+    *   **Trigger**: The AI successfully collects all required data points (Name, Email, Phone Number).
+    *   **Purpose**: Finalizes the profile enrichment process.
+    *   **State**: User is a **Qualified Lead** ready for activation/export.
 
 ---
 
@@ -162,7 +174,7 @@ Triggers when the AI has collected all required information from the user (e.g.,
 Every webhook request includes an `x-hub-signature` header. This is an **HMAC-SHA256** signature generated using your `secret`. **Always verify this signature** to ensure the request is genuine.
 
 #### Retry Policy
-Aurix currently uses a **Fire and Forget** mechanism. If your listener is down or returns a non-200 status code, the event **will not be retried**. Ensure your listener is highly available and responds quickly (within 10 seconds).
+Aurix currently uses a **Fire and Forget** mechanism. If your listener is down or returns a non-200 status code, the event **will not be retried**. Ensure your listener is highly available and responds quickly.
 
 ---
 
