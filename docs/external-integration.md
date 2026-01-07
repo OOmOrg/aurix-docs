@@ -61,7 +61,7 @@ curl -X PUT \
 }
 ```
 
-  !!! note 
+  !!! note "Note"
       Each API Key uniquely identifies a partner account and allows for **one** registered webhook listener URL. Registering a new URL will overwrite the previous one.
 
 !!! warning "Important"

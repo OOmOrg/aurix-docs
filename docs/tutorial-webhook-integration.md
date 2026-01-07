@@ -33,7 +33,7 @@ Before we begin, it is crucial to understand the difference between the two keys
 
 ## Step 1: Create a Webhook Listener
 
-First, you need a server to receive the webhook `POST` requests. Below is a production-ready Python script using `FastAPI` that listens for events and verifies the security signature.
+First, you need a server to receive the webhook `POST` requests. Below is a simple python script using `FastAPI` that listens for events and verifies the security signature.
 
 Create a file named `webhook_listener.py`:
 
