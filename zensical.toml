@@ -246,6 +246,13 @@ scheme = "slate"
 toggle.icon = "lucide/moon"
 toggle.name = "Switch to light mode"
 
+[project.markdown_extensions.admonition]
+[project.markdown_extensions.pymdownx.details]
+[project.markdown_extensions.pymdownx.superfences]
+[project.markdown_extensions.pymdownx.tabbed]
+alternate_style = true
+[project.markdown_extensions.pymdownx.blocks.caption]
+
 # ----------------------------------------------------------------------------
 # In the "font" subsection you can configure the fonts used. By default, fonts
 # are loaded from Google Fonts, giving you a wide range of choices from a set

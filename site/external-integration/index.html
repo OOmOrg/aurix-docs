@@ -114,7 +114,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#external-integration" class="md-skip">
+        <a href="#aurix-external-cdp-integration" class="md-skip">
           Skip to content
         </a>
       
@@ -430,6 +430,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#event-flow-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Event Flow Summary
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#widgetclick" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -451,19 +462,58 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#leadcomplete" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        lead.complete
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-security" class="md-nav__link">
+  <a href="#3-security-reliability" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Security
+        3. Security &amp; Reliability
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="3. Security &amp; Reliability">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#signature-verification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Signature Verification
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#retry-policy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Retry Policy
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -536,6 +586,35 @@
     
   
     Integration Tutorial
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial-widget-embedding/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-message-circle-code" viewBox="0 0 24 24"><path d="m10 9-3 3 3 3M14 15l3-3-3-3"/><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+    WhatsApp Widget Setup
   
 
     
@@ -667,6 +746,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#event-flow-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Event Flow Summary
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#widgetclick" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -688,19 +778,58 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#leadcomplete" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        lead.complete
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-security" class="md-nav__link">
+  <a href="#3-security-reliability" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Security
+        3. Security &amp; Reliability
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="3. Security &amp; Reliability">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#signature-verification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Signature Verification
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#retry-policy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Retry Policy
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -771,154 +900,212 @@
                 
                   
 
-<h1 id="external-integration">External Integration<a class="headerlink" href="#external-integration" title="Permanent link">&para;</a></h1>
-<p>Aurix can send event notifications to your specified endpoint using webhooks. This 
-integration allows you to receive real-time updates for supported events directly to your 
-backend system. This document serves as the technical reference for integrating with the Aurix platform. It covers authentication, webhook configuration, event schemas, and the Leads API.</p>
+<h1 id="aurix-external-cdp-integration">Aurix External CDP Integration</h1>
+<p>Aurix can send event notifications to your specified endpoint using webhooks. This integration allows you to receive real-time updates for supported events directly to your backend system. This document serves as the technical reference for integrating with the Aurix platform. It covers authentication, webhook configuration, event schemas, and the Leads API.</p>
 <p>For a step-by-step implementation guide, please refer to the <a href="../tutorial-webhook-integration">Integration Tutorial</a>.</p>
-<h2 id="api-overview">API Overview<a class="headerlink" href="#api-overview" title="Permanent link">&para;</a></h2>
+<h2 id="api-overview">API Overview</h2>
 <p><strong>Base URL</strong>: <code>https://chatbot-api.oomdigital.com</code></p>
 <p>All API requests must be made over <strong>HTTPS</strong>.</p>
-<h3 id="authentication">Authentication<a class="headerlink" href="#authentication" title="Permanent link">&para;</a></h3>
-<p>Access to the Integration API is protected by a <strong>Bearer Token</strong>. You must include your <code>INTEGRATION_API_KEY</code> in the <code>Authorization</code> header of every request. You can request for this key from the Aurix team.</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Authorization: Bearer &lt;YOUR_INTEGRATION_API_KEY&gt;
-</span></code></pre></div>
+<h3 id="authentication">Authentication</h3>
+<p>Access to the Integration API is protected by a <strong>Bearer Token</strong>. You must include your <code>AURIX_API_KEY</code> in the <code>Authorization</code> header of every request. You can request for this key from the Aurix team.</p>
+<p><strong>Important</strong>: Each API key uniquely identifies your partner account. The system automatically resolves your identity from the API key.</p>
+<div class="highlight"><pre><span></span><code>Authorization: Bearer &lt;YOUR_AURIX_API_KEY&gt;
+</code></pre></div>
 <hr />
-<h2 id="webhooks">Webhooks<a class="headerlink" href="#webhooks" title="Permanent link">&para;</a></h2>
+<h2 id="webhooks">Webhooks</h2>
 <p>Webhooks allow your system to receive real-time notifications about lead activities and widget interactions.</p>
-<h3 id="1-configuration">1. Configuration<a class="headerlink" href="#1-configuration" title="Permanent link">&para;</a></h3>
+<h3 id="1-configuration">1. Configuration</h3>
 <p>To start receiving events, you must register your webhook listener URL.</p>
-<h4 id="register-or-update-url">Register or Update URL<a class="headerlink" href="#register-or-update-url" title="Permanent link">&para;</a></h4>
-<p><strong>Endpoint</strong>: <code>PUT /integrations/topkee/webhook-config</code></p>
+<h4 id="register-or-update-url">Register or Update URL</h4>
+<p><strong>Endpoint</strong>: <code>PUT /integrations/external/webhook-config</code></p>
 <p>Registers or updates the URL where Aurix will send <code>POST</code> requests.</p>
-<div class="language-bash highlight"><span class="filename">Request</span><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="s2">&quot;https://chatbot-api.oomdigital.com/integrations/topkee/webhook-config&quot;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Authorization: Bearer &lt;YOUR_INTEGRATION_API_KEY&gt;&quot;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="s1">    &quot;url&quot;: &quot;https://your-backend.com/webhooks/aurix&quot;</span>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="s1">  }&#39;</span>
-</span></code></pre></div>
-<div class="language-json highlight"><span class="filename">Response</span><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">{</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dc2321f2-6a75-4d50-8861-3ea24ca29a84&quot;</span><span class="p">,</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nt">&quot;service_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;topkee&quot;</span><span class="p">,</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="nt">&quot;target_url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://your-backend.com/webhooks/aurix&quot;</span><span class="p">,</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">  </span><span class="nt">&quot;secret&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;aurix_pzgwhW5X...&quot;</span><span class="p">,</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">  </span><span class="nt">&quot;is_active&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="p">}</span>
-</span></code></pre></div>
+<div class="highlight"><span class="filename">Request</span><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="s2">&quot;https://chatbot-api.oomdigital.com/integrations/external/webhook-config&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Authorization: Bearer &lt;YOUR_AURIX_API_KEY&gt;&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{</span>
+<span class="s1">    &quot;url&quot;: &quot;https://your-backend.com/webhooks/aurix&quot;</span>
+<span class="s1">  }&#39;</span>
+</code></pre></div>
+<div class="highlight"><span class="filename">Response</span><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dc2321f2-6a75-4d50-8861-3ea24ca29a84&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;target_url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://your-backend.com/webhooks/aurix&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;secret&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;aurix_pzgwhW5X...&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;is_active&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Each API Key uniquely identifies a partner account and allows for <strong>one</strong> registered webhook listener URL. Registering a new URL will overwrite the previous one.</p>
+</div>
 <div class="admonition warning">
 <p class="admonition-title">Important</p>
 <p>Save the <code>secret</code> from the response. You will need it to verify the <code>x-hub-signature</code> header on incoming events.</p>
 </div>
-<h4 id="get-configuration">Get Configuration<a class="headerlink" href="#get-configuration" title="Permanent link">&para;</a></h4>
-<p><strong>Endpoint</strong>: <code>GET /integrations/topkee/webhook-config</code></p>
+<h4 id="get-configuration">Get Configuration</h4>
+<p><strong>Endpoint</strong>: <code>GET /integrations/external/webhook-config</code></p>
 <p>Retrieves your current webhook settings.</p>
-<div class="language-bash highlight"><span class="filename">Request</span><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="s2">&quot;https://chatbot-api.oomdigital.com/integrations/topkee/webhook-config&quot;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Authorization: Bearer &lt;YOUR_KEY&gt;&quot;</span>
-</span></code></pre></div>
-<h3 id="2-event-payloads">2. Event Payloads<a class="headerlink" href="#2-event-payloads" title="Permanent link">&para;</a></h3>
+<div class="highlight"><span class="filename">Request</span><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="s2">&quot;https://chatbot-api.oomdigital.com/integrations/external/webhook-config&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Authorization: Bearer &lt;YOUR_AURIX_API_KEY&gt;&quot;</span>
+</code></pre></div>
+<h3 id="2-event-payloads">2. Event Payloads</h3>
 <p>Aurix sends JSON payloads for the following events.</p>
-<h4 id="widgetclick"><code>widget.click</code><a class="headerlink" href="#widgetclick" title="Permanent link">&para;</a></h4>
-<p>Triggers when a visitor clicks the WhatsApp widget. Contains "First Touch" attribution.</p>
-<div class="language-json highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">{</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">&quot;event_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;widget.click&quot;</span><span class="p">,</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="nt">&quot;event_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;evt_1704200000&quot;</span><span class="p">,</span>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2024-01-02T12:00:00Z&quot;</span><span class="p">,</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span><span class="nt">&quot;correlation_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;O-vpbWx3M&quot;</span><span class="p">,</span>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="nt">&quot;device_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;9fad5f62-2d08-49d4-852a-b48be43beb68&quot;</span><span class="p">,</span>
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">    </span><span class="nt">&quot;click_url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://example.com/landing?utm_source=google&quot;</span><span class="p">,</span>
-</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">    </span><span class="nt">&quot;parsed_params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">      </span><span class="nt">&quot;utm_source&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;google&quot;</span>
-</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">    </span><span class="p">},</span>
-</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="w">    </span><span class="nt">&quot;ip_address&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span>
-</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="w">    </span><span class="nt">&quot;user_agent&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Mozilla/5.0...&quot;</span>
-</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="w">  </span><span class="p">}</span>
-</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="p">}</span>
-</span></code></pre></div>
-<h4 id="leadcorrelated"><code>lead.correlated</code><a class="headerlink" href="#leadcorrelated" title="Permanent link">&para;</a></h4>
-<p>Triggers when an anonymous visitor sends their first message. Links the <code>correlation_id</code> to a phone number.</p>
-<div class="language-json highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">{</span>
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">&quot;event_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;lead.correlated&quot;</span><span class="p">,</span>
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span><span class="nt">&quot;event_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;evt_1704200500&quot;</span><span class="p">,</span>
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">  </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2024-01-02T12:05:00Z&quot;</span><span class="p">,</span>
-</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="nt">&quot;correlation_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;O-vpbWx3M&quot;</span><span class="p">,</span>
-</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">    </span><span class="nt">&quot;conversation_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3293</span><span class="p">,</span>
-</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">    </span><span class="nt">&quot;phone_number&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;6512345678&quot;</span><span class="p">,</span>
-</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">    </span><span class="nt">&quot;lead_status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;correlated&quot;</span><span class="p">,</span>
-</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">    </span><span class="nt">&quot;channel_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;791163770738681&quot;</span>
-</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">  </span><span class="p">}</span>
-</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="p">}</span>
-</span></code></pre></div>
-<h3 id="3-security">3. Security<a class="headerlink" href="#3-security" title="Permanent link">&para;</a></h3>
-<p>Every webhook request includes an <code>x-hub-signature</code> header. This is an HMAC-SHA256 signature generated using your <code>secret</code>. <strong>Always verify this signature</strong> to ensure the request is genuine.</p>
+<h4 id="event-flow-summary">Event Flow Summary</h4>
+<ol>
+<li>
+<p><strong><code>widget.click</code></strong> (User Action)</p>
+<ul>
+<li><strong>Trigger</strong>: An <strong>Anonymous User</strong> clicks the WhatsApp widget.</li>
+<li><strong>Purpose</strong>: Initiates tracking and captures attribution data (UTM params, IP) for the session.</li>
+<li><strong>State</strong>: User is <strong>Anonymous</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>lead.correlated</code></strong> (Identity Resolution)</p>
+<ul>
+<li><strong>Trigger</strong>: The user sends their first message, allowing the system to resolve their identity (Phone Number).</li>
+<li><strong>Purpose</strong>: Links the anonymous session (<code>correlation_id</code>) to a <strong>Known Profile</strong>.</li>
+<li><strong>State</strong>: User is <strong>Identified</strong> but profile data is incomplete.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>lead.complete</code></strong> (Profile Enrichment)</p>
+<ul>
+<li><strong>Trigger</strong>: The AI successfully collects all required data points (Name, Email, Phone Number).</li>
+<li><strong>Purpose</strong>: Finalizes the profile enrichment process.</li>
+<li><strong>State</strong>: User is a <strong>Qualified Lead</strong> ready for activation/export.</li>
+</ul>
+</li>
+</ol>
 <hr />
-<h2 id="leads-api">Leads API<a class="headerlink" href="#leads-api" title="Permanent link">&para;</a></h2>
+<h4 id="widgetclick"><code>widget.click</code></h4>
+<p>Triggers when a visitor clicks the WhatsApp widget. Contains "First Touch" attribution.</p>
+<p>For a detailed breakdown of what data fields are parsed and stored (e.g. UTM parameters, device info), please refer to the <a href="../#current-vs-planned-tracking-capabilities">Tracking Capabilities</a> section.</p>
+<ul>
+<li><code>correlation_id</code>: (String) A unique session identifier used to link future events to this click.</li>
+<li><code>parsed_params</code>: (Object) Dictionary of UTM parameters and GCLID extracted from the URL.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;event_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;widget.click&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;event_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;evt_1704200000&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2024-01-02T12:00:00Z&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;correlation_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;O-vpbWx3M&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;device_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;9fad5f62-2d08-49d4-852a-b48be43beb68&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;click_url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://example.com/landing?utm_source=google&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;parsed_params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;utm_source&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;google&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;ip_address&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;user_agent&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Mozilla/5.0...&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h4 id="leadcorrelated"><code>lead.correlated</code></h4>
+<p>Triggers when an anonymous visitor sends their first message. Links the <code>correlation_id</code> to a phone number.</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;event_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;lead.correlated&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;event_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;evt_1704200500&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2024-01-02T12:05:00Z&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;correlation_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;O-vpbWx3M&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;conversation_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3293</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;phone_number&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;6512345678&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;lead_status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;correlated&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;channel_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;791163770738681&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h4 id="leadcomplete"><code>lead.complete</code></h4>
+<p>Triggers when the AI has collected all required information from the user (e.g., name, email, intent). This event signifies a qualified lead.</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;event_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;lead.complete&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;event_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;evt_1704201000&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2024-01-02T12:10:00Z&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;correlation_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;O-vpbWx3M&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;conversation_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3293</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;lead_status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;complete&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;lead_data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Mock User&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;mock@example.com&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;phone&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;+15550009999&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;company&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Mock Inc&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;intent&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Testing Webhooks&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="3-security-reliability">3. Security &amp; Reliability</h3>
+<h4 id="signature-verification">Signature Verification</h4>
+<p>Every webhook request includes an <code>x-hub-signature</code> header. This is an <strong>HMAC-SHA256</strong> signature generated using your <code>secret</code>. <strong>Always verify this signature</strong> to ensure the request is genuine.</p>
+<h4 id="retry-policy">Retry Policy</h4>
+<p>Aurix currently uses a <strong>Fire and Forget</strong> mechanism. If your listener is down or returns a non-200 status code, the event <strong>will not be retried</strong>. Ensure your listener is highly available and responds quickly.</p>
+<hr />
+<h2 id="leads-api">Leads API</h2>
 <p>Fetch lead data and attribution logs programmatically.</p>
-<h3 id="get-leads">Get Leads<a class="headerlink" href="#get-leads" title="Permanent link">&para;</a></h3>
-<p><strong>Endpoint</strong>: <code>GET /integrations/topkee/leads</code></p>
+<h3 id="get-leads">Get Leads</h3>
+<p><strong>Endpoint</strong>: <code>GET /integrations/external/leads</code></p>
 <p>Returns a list of leads with their status, collected form data, and attribution info.</p>
 <p><strong>Query Parameters</strong>:
 *   <code>limit</code>: (int) Max records to return (default 50).
 *   <code>offset</code>: (int) Pagination offset.
 *   <code>from_date</code>: (ISO 8601) Filter start date.
 *   <code>to_date</code>: (ISO 8601) Filter end date.</p>
-<div class="language-bash highlight"><span class="filename">Request</span><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="s2">&quot;https://chatbot-api.oomdigital.com/integrations/topkee/leads?limit=5&quot;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Authorization: Bearer &lt;YOUR_INTEGRATION_API_KEY&gt;&quot;</span>
-</span></code></pre></div>
-<div class="language-json highlight"><span class="filename">Response</span><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">{</span>
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span>
-</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ok&quot;</span><span class="p">,</span>
-</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">    </span><span class="p">{</span>
-</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">      </span><span class="nt">&quot;lead_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">470</span><span class="p">,</span>
-</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">      </span><span class="nt">&quot;lead_status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;active&quot;</span><span class="p">,</span>
-</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">      </span><span class="nt">&quot;lead_json&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">        </span><span class="nt">&quot;contact_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Jane Doe&quot;</span><span class="p">,</span>
-</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">        </span><span class="nt">&quot;contact_number&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;6587487282&quot;</span><span class="p">,</span>
-</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="w">        </span><span class="nt">&quot;contact_email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;jane@example.com&quot;</span><span class="p">,</span>
-</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="w">        </span><span class="nt">&quot;preferred_outlet&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Orchard Gateway&quot;</span><span class="p">,</span>
-</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="w">        </span><span class="nt">&quot;selected_service&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Eyelash Extensions&quot;</span><span class="p">,</span>
-</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="w">        </span><span class="nt">&quot;preferred_date_time&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1 January 2026&quot;</span>
-</span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="w">      </span><span class="p">},</span>
-</span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a><span class="w">      </span><span class="nt">&quot;created_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-12-31T12:20:16.583181Z&quot;</span><span class="p">,</span>
-</span><span id="__span-7-17"><a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a><span class="w">      </span><span class="nt">&quot;updated_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-01-02T01:38:05.868837Z&quot;</span><span class="p">,</span>
-</span><span id="__span-7-18"><a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a><span class="w">      </span><span class="nt">&quot;click_url&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-</span><span id="__span-7-19"><a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a><span class="w">      </span><span class="nt">&quot;parsed_params&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-</span><span id="__span-7-20"><a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a><span class="w">      </span><span class="nt">&quot;ip_address&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-</span><span id="__span-7-21"><a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a><span class="w">      </span><span class="nt">&quot;user_agent&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
-</span><span id="__span-7-22"><a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a><span class="w">    </span><span class="p">}</span>
-</span><span id="__span-7-23"><a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a><span class="w">  </span><span class="p">]</span>
-</span><span id="__span-7-24"><a id="__codelineno-7-24" name="__codelineno-7-24" href="#__codelineno-7-24"></a><span class="p">}</span>
-</span></code></pre></div>
-<h3 id="get-attribution-logs">Get Attribution Logs<a class="headerlink" href="#get-attribution-logs" title="Permanent link">&para;</a></h3>
-<p><strong>Endpoint</strong>: <code>GET /integrations/topkee/attribution</code></p>
+<div class="highlight"><span class="filename">Request</span><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="s2">&quot;https://chatbot-api.oomdigital.com/integrations/external/leads?limit=5&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Authorization: Bearer &lt;YOUR_AURIX_API_KEY&gt;&quot;</span>
+</code></pre></div>
+<div class="highlight"><span class="filename">Response</span><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ok&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;lead_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">470</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;lead_status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;active&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;lead_json&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;contact_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Jane Doe&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;contact_number&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;6587487282&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;contact_email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;jane@example.com&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;preferred_outlet&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Orchard Gateway&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;selected_service&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Eyelash Extensions&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;preferred_date_time&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1 January 2026&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;created_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-12-31T12:20:16.583181Z&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;updated_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-01-02T01:38:05.868837Z&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;click_url&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;parsed_params&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;ip_address&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;user_agent&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="get-attribution-logs">Get Attribution Logs</h3>
+<p><strong>Endpoint</strong>: <code>GET /integrations/external/attribution</code></p>
 <p>Retrieves raw widget click logs, useful for auditing traffic sources.</p>
-<div class="language-bash highlight"><span class="filename">Request</span><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="s2">&quot;https://chatbot-api.oomdigital.com/integrations/topkee/attribution?limit=5&quot;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Authorization: Bearer &lt;YOUR_KEY&gt;&quot;</span>
-</span></code></pre></div>
-<div class="language-json highlight"><span class="filename">Response</span><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="p">{</span>
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span>
-</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ok&quot;</span><span class="p">,</span>
-</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">    </span><span class="p">{</span>
-</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">      </span><span class="nt">&quot;wa_inbound_source_correlation_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;O-vpbWx3M&quot;</span><span class="p">,</span>
-</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">      </span><span class="nt">&quot;wa_inbound_source_device_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;9fad5f62-2d08-49d4-852a-b48be43beb68&quot;</span><span class="p">,</span>
-</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="w">      </span><span class="nt">&quot;created_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-01-02T11:17:02.644566Z&quot;</span><span class="p">,</span>
-</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="w">      </span><span class="nt">&quot;wa_inbound_source_click_url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://example.com/auth/login&quot;</span><span class="p">,</span>
-</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="w">      </span><span class="nt">&quot;wa_inbound_source_first_raw_url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://example.com/auth/login&quot;</span><span class="p">,</span>
-</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="w">      </span><span class="nt">&quot;wa_inbound_source_parsed_params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span>
-</span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="w">      </span><span class="nt">&quot;wa_inbound_source_ip_address&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span>
-</span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="w">      </span><span class="nt">&quot;wa_inbound_source_user_agent&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Mozilla/5.0...&quot;</span>
-</span><span id="__span-9-14"><a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="w">    </span><span class="p">}</span>
-</span><span id="__span-9-15"><a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="w">  </span><span class="p">]</span>
-</span><span id="__span-9-16"><a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a><span class="p">}</span>
-</span></code></pre></div>
+<div class="highlight"><span class="filename">Request</span><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="s2">&quot;https://chatbot-api.oomdigital.com/integrations/external/attribution?limit=5&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Authorization: Bearer &lt;YOUR_AURIX_API_KEY&gt;&quot;</span>
+</code></pre></div>
+<div class="highlight"><span class="filename">Response</span><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ok&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;wa_inbound_source_correlation_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;O-vpbWx3M&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;wa_inbound_source_device_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;9fad5f62-2d08-49d4-852a-b48be43beb68&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;created_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-01-02T11:17:02.644566Z&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;wa_inbound_source_click_url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://example.com/auth/login&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;wa_inbound_source_first_raw_url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://example.com/auth/login&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;wa_inbound_source_parsed_params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span>
+<span class="w">      </span><span class="nt">&quot;wa_inbound_source_ip_address&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;wa_inbound_source_user_agent&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Mozilla/5.0...&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
 
 
 
