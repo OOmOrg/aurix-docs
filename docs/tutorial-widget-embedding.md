@@ -148,7 +148,7 @@ Different platforms (Shopify, WordPress, etc.) have different methods for insert
     *   The widget is positioned at the bottom-right by default. If it overlaps with other site elements (like "Back to Top" buttons), the website developer may need to adjust the CSS positioning of either the widget or the conflicting element.
 
 ??? question "Console error: 'Refused to load the script because it violates Content Security Policy'"
-    *   The website may have a Content Security Policy (CSP) that blocks external scripts. The developer will need to add `main.du8hnidrrumqb.amplifyapp.com` to the `script-src` directive of the CSP.
+    *   The website may have a Content Security Policy (CSP) that blocks external scripts. The developer will need to add the `src` root url to the `script-src` directive of the CSP.
 
 ??? question "Can I use multiple numbers on one site?"
     Currently, the widget is designed to use one primary WhatsApp number per installation. To change numbers, update the settings in your dashboard and the widget will reflect the changes automatically; you will need to copy the new configuration and repeat the installation steps again.
