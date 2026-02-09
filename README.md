@@ -1,6 +1,6 @@
 # Aurix External Documentation
 
-This repository contains the external documentation for [aurix.com.sg](https://aurix.com.sg).
+This repository contains the external documentation for [app.aurix.com.sg](https://app.aurix.com.sg).
 
 The site is built using [Zensical](https://zensical.org/docs/get-started/), a modern static site generator for project documentation.
 
